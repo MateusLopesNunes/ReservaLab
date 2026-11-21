@@ -1,0 +1,30 @@
+:root { font-family: system-ui, sans-serif; color: #17324b; background: #f4f7fa; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.container { max-width: 720px; margin: 0 auto; padding: 80px 24px; }
+.eyebrow { color: #286c77; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; }
+h1 { font-size: clamp(2.5rem, 7vw, 4rem); margin: 12px 0; }
+.description { color: #50677a; line-height: 1.6; }
+.card { margin-top: 36px; padding: 24px; background: white; border: 1px solid #dce5eb; border-radius: 12px; }
+h2 { margin-top: 0; font-size: 1.1rem; }
+.success { color: #176648; }
+.error { color: #a52d30; }
+button { border: 0; border-radius: 6px; padding: 10px 16px; background: #205e69; color: white; font: inherit; cursor: pointer; }
+button:disabled { opacity: 0.6; cursor: wait; }
+button:focus-visible { outline: 3px solid #e7a833; outline-offset: 3px; }
+.back-link { display: inline-block; margin-bottom: 24px; color: #205e69; }
+.primary-link { display: inline-block; margin-top: 16px; border-radius: 6px; padding: 10px 16px; background: #205e69; color: white; text-decoration: none; }
+.primary-link:focus-visible, .back-link:focus-visible { outline: 3px solid #e7a833; outline-offset: 3px; }
+form { display: grid; gap: 10px; }
+label { font-weight: 600; }
+input, textarea { width: 100%; border: 1px solid #b8cbd3; border-radius: 6px; padding: 10px; font: inherit; color: inherit; }
+textarea { resize: vertical; }
+input:focus-visible, textarea:focus-visible { outline: 3px solid #e7a833; outline-offset: 2px; }
+.optional { font-weight: 400; color: #50677a; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.section-heading h2 { margin: 0; }
+button.secondary { background: #e6f0f1; color: #205e69; }
+.equipment-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.equipment-list li { padding: 16px 0; border-top: 1px solid #dce5eb; }
+.equipment-list li p { margin: 6px 0 0; color: #50677a; white-space: pre-wrap; }
+@media (max-width: 520px) { .section-heading { align-items: flex-start; flex-direction: column; } }

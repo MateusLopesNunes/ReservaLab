@@ -1,10 +1,11 @@
 import { z } from 'zod'
+import { authenticatedFetch } from '../../auth/services/authenticatedFetch'
 import { createEquipmentSchema, equipmentSchema, type CreateEquipment, type Equipment } from '../schemas/equipmentSchema'
 
 const equipmentListSchema = z.array(equipmentSchema)
 
 export async function listEquipment(): Promise<Equipment[]> {
-  const response = await fetch('/api/equipment')
+  const response = await authenticatedFetch('/api/equipment')
   if (!response.ok) throw new Error('Não foi possível carregar os equipamentos.')
 
   const data: unknown = await response.json()
@@ -15,7 +16,7 @@ export async function listEquipment(): Promise<Equipment[]> {
 
 export async function createEquipment(input: CreateEquipment): Promise<Equipment> {
   const payload = createEquipmentSchema.parse(input)
-  const response = await fetch('/api/equipment', {
+  const response = await authenticatedFetch('/api/equipment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)

@@ -7,6 +7,15 @@ vi.mock('../equipment/data/equipmentRepository.js', () => ({
   listEquipment: vi.fn()
 }))
 
+vi.mock('../auth/routes.js', async () => {
+  const { Router } = await import('express')
+  return { authRouter: Router(), requireAuthentication: vi.fn() }
+})
+vi.mock('../reservations/routes.js', async () => {
+  const { Router } = await import('express')
+  return { reservationsRouter: Router() }
+})
+
 describe('GET /api/status', () => {
   it('retorna o contrato de status da API em JSON', async () => {
     const response = await request(app).get('/api/status')

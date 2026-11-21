@@ -1,6 +1,7 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { getDatabaseUrl } from './env.js'
 
+beforeEach(() => vi.stubEnv('RESERVALAB_TEST_MODE', '0'))
 afterEach(() => vi.unstubAllEnvs())
 
 describe('getDatabaseUrl', () => {

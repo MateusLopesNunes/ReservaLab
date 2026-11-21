@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:coverage": "node scripts/pilot-database.mjs -- npm run test:coverage:all -w backend",
+    "test:coverage:all": "vitest run --coverage --config vitest.coverage.config.ts",
     "db:check": "tsx src/db/check.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
@@ -19,6 +21,7 @@
     "dotenv": "^18.0.10",
     "drizzle-orm": "^0.45.4",
     "express": "^4.21.2",
+    "jose": "^6.2.18",
     "pg": "^8.23.1",
     "zod": "^4.6.7"
   },

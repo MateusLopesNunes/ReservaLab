@@ -16,6 +16,14 @@ reservalab/
 - Node.js 20.19 ou superior e npm.
 - Docker com Docker Compose para executar o PostgreSQL.
 
+## Worktrees no Codex
+
+O ambiente local do Codex prepara uma nova worktree quando selecionado ao iniciar um chat. O script cria um `.env` exclusivo, instala dependências, inicia PostgreSQL em um projeto Compose próprio, escolhe portas livres e aplica as migrações. Docker deve estar em execução. O script preserva um `.env` que já exista.
+
+Depois da preparação, execute `npm run dev` na worktree e abra a URL informada pelo Vite. A conexão, a chave JWT e as portas são carregadas do `.env` dessa worktree. Cada banco possui volume próprio. Para preparar manualmente uma worktree nova, execute `npm run worktree:setup` antes de `npm run dev`.
+
+Para parar o banco da worktree, execute `docker compose down` na raiz dela. O volume é preservado. Para reiniciar o banco posteriormente, execute `docker compose up -d`. O script de setup não recria ou altera um `.env` existente.
+
 ## PostgreSQL com Docker
 
 Preencha o arquivo `.env` na raiz do projeto. Para preparar outro ambiente, copie `.env.example` para `.env` e preencha:

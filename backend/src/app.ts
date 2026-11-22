@@ -1,5 +1,6 @@
 import express, { type ErrorRequestHandler, type Express } from 'express'
 import statusRouter from './modules/status/routes.js'
+import { profileOptionsRouter } from './modules/profileOptions/routes.js'
 import equipmentRouter from './modules/equipment/routes.js'
 import { authRouter, requireAuthentication } from './modules/auth/routes.js'
 import { reservationsRouter } from './modules/reservations/routes.js'
@@ -25,6 +26,7 @@ const handleRequestError: ErrorRequestHandler = (error: unknown, _request, respo
 app.use(express.json())
 app.use('/api/status', statusRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/profile-options', profileOptionsRouter)
 app.use('/api/equipment/:equipmentId/reservations', requireAuthentication, reservationsRouter)
 app.use('/api/equipment', requireAuthentication, equipmentRouter)
 app.use(handleRequestError)

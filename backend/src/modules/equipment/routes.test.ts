@@ -15,6 +15,10 @@ vi.mock('../auth/routes.js', async () => {
     requireAuthentication: (_request: unknown, _response: unknown, next: () => void) => next()
   }
 })
+vi.mock('../profileOptions/routes.js', async () => {
+  const { Router } = await import('express')
+  return { profileOptionsRouter: Router() }
+})
 vi.mock('../reservations/routes.js', async () => {
   const { Router } = await import('express')
   return { reservationsRouter: Router() }

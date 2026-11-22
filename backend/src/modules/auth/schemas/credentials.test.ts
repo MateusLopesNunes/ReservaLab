@@ -3,14 +3,14 @@ import { credentialsSchema, registrationSchema, sessionInputSchema } from './cre
 
 const registration = {
   email: ' Account@Example.test ', password: '  senha para testes  ', firstName: ' Nome ',
-  lastName: ' Sobrenome ', state: ' SP ', city: ' Campinas ', birthDate: '2000-02-29', sex: ' Feminino '
+  lastName: ' Sobrenome ', state: ' GO ', city: '00000000-0000-4000-8000-000000000001', birthDate: '2000-02-29', sex: ' feminino '
 }
 
 describe('entrada de conta', () => {
   it('normaliza e-mail e perfil preservando a senha', () => {
     expect(registrationSchema.parse(registration)).toEqual({
       ...registration, email: 'account@example.test', firstName: 'Nome',
-      lastName: 'Sobrenome', state: 'SP', city: 'Campinas', sex: 'Feminino'
+      lastName: 'Sobrenome', state: 'GO', city: '00000000-0000-4000-8000-000000000001', sex: 'feminino'
     })
   })
 

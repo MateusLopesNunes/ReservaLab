@@ -5,6 +5,7 @@ import { findOwnProfile, insertAccount } from './data/accountRepository.js'
 import { sessionIsActive } from './data/sessionRepository.js'
 import { signAccessToken } from './services/accessToken.js'
 import { HashLimitError } from './services/hashLimit.js'
+import { optionsExist } from '../profileOptions/queries.js'
 import { hashPassword } from './services/password.js'
 
 const registration = { ...profile, password: credentials.password }
@@ -12,6 +13,7 @@ const registration = { ...profile, password: credentials.password }
 beforeEach(() => {
   vi.resetAllMocks()
   setAuthEnv()
+  vi.mocked(optionsExist).mockResolvedValue(true)
 })
 afterEach(() => vi.unstubAllEnvs())
 

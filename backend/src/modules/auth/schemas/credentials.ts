@@ -8,10 +8,10 @@ export const credentialsSchema = z.strictObject({ email, password })
 export const registrationSchema = credentialsSchema.extend({
   firstName: requiredText(100),
   lastName: requiredText(100),
-  state: requiredText(100),
-  city: requiredText(120),
+  state: z.string().trim().regex(/^[A-Z]{2}$/),
+  city: z.uuid(),
   birthDate: z.iso.date().refine(value => !value.startsWith('0000-') && value <= new Date().toISOString().slice(0, 10)),
-  sex: requiredText(60)
+  sex: z.string().trim().min(1).max(32)
 })
 export const sessionInputSchema = z.strictObject({ sessionId: z.uuid().optional() })
 

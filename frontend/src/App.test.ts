@@ -4,6 +4,12 @@ import App from './App.vue'
 import { navigate } from './modules/auth/services/navigation'
 import { replaceSession } from './modules/auth/services/sessionState'
 
+vi.mock('./modules/auth/services/profileOptions', () => ({
+  listStates: async () => [{ code: 'GO', name: 'Goiás' }],
+  listSexes: async () => [{ code: 'feminino', label: 'Feminino' }],
+  listCities: async () => [{ id: 'd5c48d1f-a1b9-4fd2-b65e-718943a1bc57', name: 'Ceres', stateCode: 'GO' }]
+}))
+
 vi.mock('./modules/equipamentos/pages/EquipamentosPage.vue', () => ({
   default: { template: '<main><h1>Área de equipamentos</h1></main>' }
 }))
@@ -21,8 +27,8 @@ const session = {
 }
 const data = {
   firstName: 'Maria', lastName: 'Oliveira', email: 'maria@example.com',
-  password: 'uma-frase-bem-longa', state: 'São Paulo', city: 'Santos',
-  birthDate: '1992-09-10', sex: 'Feminino'
+  password: 'uma-frase-bem-longa', state: 'GO', city: 'd5c48d1f-a1b9-4fd2-b65e-718943a1bc57',
+  birthDate: '1992-09-10', sex: 'feminino'
 }
 const fetchMock = vi.fn<typeof fetch>()
 let app: VueWrapper
@@ -125,11 +131,14 @@ describe('navegação e formulários de conta', () => {
     open('/cadastro?next=%2Freservas')
     await flushPromises()
     await app.get('form').trigger('submit')
-    expect(app.findAll('input[aria-invalid="true"]')).toHaveLength(8)
+    expect(app.findAll('[aria-invalid="true"]')).toHaveLength(8)
     expect(fetchMock).toHaveBeenCalledTimes(1)
 
     fetchMock.mockResolvedValueOnce(Response.json({ userId: session.userId }, { status: 201 }))
-    for (const [field, value] of Object.entries(data)) await app.get('#' + field).setValue(value)
+    for (const [field, value] of Object.entries(data)) {
+      await app.get('#' + field).setValue(value)
+      if (field === 'state') await flushPromises()
+    }
     await app.get('form').trigger('submit')
     await flushPromises()
 
@@ -143,7 +152,10 @@ describe('navegação e formulários de conta', () => {
     open('/cadastro')
     await flushPromises()
     fetchMock.mockResolvedValueOnce(Response.json({ code: 'EMAIL_ALREADY_REGISTERED', message: 'E-mail já cadastrado.' }, { status: 409 }))
-    for (const [field, value] of Object.entries(data)) await app.get('#' + field).setValue(value)
+    for (const [field, value] of Object.entries(data)) {
+      await app.get('#' + field).setValue(value)
+      if (field === 'state') await flushPromises()
+    }
     await app.get('form').trigger('submit')
     await flushPromises()
 

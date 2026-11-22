@@ -13,8 +13,8 @@ export const registrationSchema = loginSchema.extend({
   password: z.string().min(15, 'Use pelo menos 15 caracteres.').max(128, 'Use até 128 caracteres.'),
   firstName: field('O nome', 100),
   lastName: field('O sobrenome', 100),
-  state: field('O estado', 100),
-  city: field('O nome da cidade', 120),
+  state: z.string().length(2, 'Selecione um estado.'),
+  city: z.uuid('Selecione uma cidade.'),
   birthDate: z.iso.date('Informe uma data de nascimento válida.').refine(
     value => value <= new Date().toISOString().slice(0, 10),
     'A data de nascimento não pode estar no futuro.'

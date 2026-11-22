@@ -163,3 +163,36 @@ O código do backend fica em `backend/src/modules/<funcionalidade>/`. A tela ini
 O proxy configurado no Vite é apenas para desenvolvimento: para publicar, configure um servidor ou proxy para encaminhar `/api` ao backend.
 
 Referências: [Vue com TypeScript](https://vuejs.org/guide/typescript/overview.html) e [Vitest 4](https://v4.vitest.dev/guide/).
+
+## Opções de cadastro e dados anteriores
+
+A migração de cadastro instala estado, cidades e opções de sexo e inclui a carga inicial idempotente em `backend/drizzle/seeds/0001_profile_options.sql`. Após migrar, execute `npm run db:profile:seed` para repetir a carga sem duplicar dados. A migração executa o mesmo SQL automaticamente.
+
+Antes de aplicar a migração em uma base anterior, confira o destino configurado em `DATABASE_URL` e execute `npm run db:profile:check`. O diagnóstico lista apenas IDs e os campos que precisam de correção. Para cada conta sinalizada, corrija os campos no banco anterior com dados confirmados pelo responsável. Os valores aceitos na migração são Goiás ou GO para estado, Ceres ou Rialma para cidade e os rótulos Feminino, Masculino, Intersexo, Outro ou Prefiro não informar para sexo. Espaços nas extremidades, diferenças de caixa e acentuação são normalizados. Depois execute novamente o diagnóstico e, quando não houver pendências, `npm run db:migrate`. A migração é transacional e preserva os dados se encontrar valores sem correspondência.
+
+### Consulta das opções e contrato de cadastro
+
+As opções são públicas para permitir o autocadastro:
+
+- `GET /api/profile-options/states` retorna estados com `code` e `name`.
+- `GET /api/profile-options/cities?state=GO` retorna cidades do estado com `id`, `name` e `stateCode`.
+- `GET /api/profile-options/sexes` retorna opções com `code` e `label`.
+
+Ao enviar `POST /api/auth/register`, preencha `state` com o código do estado, `city` com o UUID da cidade e `sex` com o código da opção, obtidos nas consultas acima. Um exemplo para Ceres usa:
+
+```json
+{
+  "email": "pessoa@example.test",
+  "password": "senha de exemplo segura",
+  "firstName": "Ana",
+  "lastName": "Silva",
+  "state": "GO",
+  "city": "00000000-0000-4000-8000-000000000001",
+  "birthDate": "1990-04-15",
+  "sex": "feminino"
+}
+```
+
+A API rejeita uma cidade que não pertence ao estado selecionado e opções não cadastradas.
+
+Para atualizar o SQL inicial incorporado à migração a partir do seed, execute `npm run db:profile:sync`. Para conferir a sincronização sem alterar arquivos, execute `npm run db:profile:sync -- --check`.

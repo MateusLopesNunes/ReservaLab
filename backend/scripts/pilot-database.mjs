@@ -99,6 +99,9 @@ async function main() {
   const existingEquipment = args[0] === '--with-existing-equipment'
   if (existingEquipment) args.shift()
   if (args[0] === '--') args.shift()
+  const legacyProfiles = args[0] === '--verify-profile-migration'
+  if (legacyProfiles) args.shift()
+  if (args[0] === '--') args.shift()
   if (!args.length) args.push('npm', 'run', 'test:integration', '-w', 'backend')
 
   const dir = await mkdtemp(join(tmpdir(), 'reservalab-pilot-'))
@@ -120,6 +123,7 @@ async function main() {
       await seedExistingEquipment(dir, env)
       env.RESERVALAB_TEST_LEGACY_EQUIPMENT = '1'
     }
+    if (legacyProfiles) await run('node', ['--import', 'tsx', 'backend/scripts/test-profile-migration.mjs'], env)
     await run('npm', ['run', 'db:migrate'], env)
     await run(args[0], args.slice(1), env)
   } finally {

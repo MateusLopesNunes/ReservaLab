@@ -9,6 +9,7 @@ vi.mock('../data/sessionRepository.js', () => ({
   endSession: vi.fn(), sessionIsActive: vi.fn(), startSession: vi.fn()
 }))
 vi.mock('../data/refreshRepository.js', () => ({ rotateRefresh: vi.fn() }))
+vi.mock('../../profileOptions/queries.js', () => ({ optionsExist: vi.fn() }))
 vi.mock('../services/password.js', () => ({ hashPassword: vi.fn(), verifyPassword: vi.fn() }))
 
 export const app = express().use(express.json()).use('/api/auth', authRouter)
@@ -21,7 +22,7 @@ export const session = { id: sessionId, userId, expiresAt: new Date('2090-01-01T
 export const credentials = { email: 'test@example.test', password: 'uma senha longa o suficiente' }
 export const profile = {
   email: credentials.email, firstName: 'Nome', lastName: 'Sobrenome',
-  state: 'SP', city: 'São Paulo', birthDate: '2000-01-01', sex: 'Feminino'
+  state: 'GO', city: '00000000-0000-4000-8000-000000000001', birthDate: '2000-01-01', sex: 'feminino'
 }
 
 export function setAuthEnv(): void {

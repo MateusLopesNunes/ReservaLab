@@ -15,7 +15,10 @@
     "test:coverage:all": "vitest run --coverage --config vitest.coverage.config.ts",
     "db:check": "tsx src/db/check.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:profile:seed": "node --import tsx scripts/seed-profile-options.mjs",
+    "db:profile:check": "node --import tsx scripts/check-profile-options.mjs",
+    "db:profile:sync": "node scripts/sync-profile-seed.mjs"
   },
   "dependencies": {
     "dotenv": "^18.0.10",

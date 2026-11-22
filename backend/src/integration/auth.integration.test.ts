@@ -43,7 +43,7 @@ describe('autenticação com PostgreSQL', () => {
   it('retorna dados da própria conta e revoga a família após reuso do refresh', async () => {
     const session = await createSession()
     const me = await request(app).get('/api/auth/me').auth(session.token, { type: 'bearer' }).expect(200)
-    expect(me.body).toEqual({ userId: session.userId, email: session.email, ...profile })
+    expect(me.body).toEqual({ userId: session.userId, email: session.email, ...profile, state: 'Goiás', city: 'Ceres', sex: 'Feminino' })
     const refresh = () => request(app).post('/api/auth/refresh')
       .set('Origin', origin).set('Cookie', session.cookie).send({ sessionId: session.sessionId })
     const rotated = await refresh().expect(200)

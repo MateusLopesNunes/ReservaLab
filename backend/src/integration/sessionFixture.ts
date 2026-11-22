@@ -7,10 +7,10 @@ export const validPassword = 'uma senha longa para o piloto'
 export const profile = {
   firstName: 'Ana',
   lastName: 'da Silva',
-  state: 'SP',
-  city: 'São Paulo',
+  state: 'GO',
+  city: '00000000-0000-4000-8000-000000000001',
   birthDate: '1990-04-15',
-  sex: 'Feminino'
+  sex: 'feminino'
 }
 
 export function responseCookie(headers: Record<string, unknown>): string {

@@ -1,6 +1,6 @@
 # Piloto de Reservas com conta e login
 
-**Planejamento revisado em 21/11/2026.** O [resumo técnico versão 1](resumo-tecnico.md) aguarda aprovação explícita. O piloto terá criação e consulta de reservas por equipamento com autenticação. As decisões abaixo serão a base do contrato funcional e da TechSpec. [Plano do fluxo](../fluxo-agentico-reservalab/plano.md) · [Guia de coordenação](../fluxo-agentico-reservalab/etapa-3-coordenacao.md).
+**Planejamento revisado em 21/11/2026.** O [resumo técnico versão 1](resumo-tecnico.md) foi aprovado explicitamente em 21/11/2026. O piloto terá criação e consulta de reservas por equipamento com autenticação. As decisões abaixo serão a base do contrato funcional e da TechSpec. [Plano do fluxo](../fluxo-agentico-reservalab/plano.md) · [Guia de coordenação](../fluxo-agentico-reservalab/etapa-3-coordenacao.md).
 
 ## Regras confirmadas
 
@@ -30,4 +30,4 @@ O [contrato funcional](contrato-funcional.md), a [TechSpec](techspec.md) e as [t
 
 ## Ponto de retomada
 
-A revisão independente foi concluída e os ajustes de sessão, isolamento, erros e concorrência foram incorporados. A nova leitura confirmou a cobertura dos pontos críticos. O trabalho está no ponto de decisão sobre o resumo técnico versão 1. A implementação na worktree começa após a aprovação explícita.
+A implementação, a revisão de código e o QA foram concluídos na worktree da branch `piloto/reservas`. O [registro de entrega](entrega.md) contém evidências por critério e o texto para o PR. A publicação da branch e a abertura do PR aguardam autorização. O merge depende da aprovação humana do PR.

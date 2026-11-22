@@ -1,10 +1,14 @@
 import app from './app.js'
 import { pool } from './db/client.js'
+import { validateAuthConfig } from './modules/auth/authConfig.js'
 
 const port = Number(process.env.PORT ?? 3000)
 
-const server = app.listen(port, () => {
-  console.log(`API disponível em http://localhost:${port}`)
+validateAuthConfig()
+
+const server = app.listen(port, '127.0.0.1', () => {
+  const address = server.address()
+  if (address && typeof address !== 'string') console.log(`API disponível na porta ${address.port}`)
 })
 
 let shuttingDown = false

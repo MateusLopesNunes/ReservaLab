@@ -1,6 +1,6 @@
 # Resumo técnico do piloto de Reservas
 
-**Versão 1, aguardando aprovação.** O [contrato funcional](contrato-funcional.md), a [TechSpec](techspec.md) e as [tarefas](tarefas.md) foram revisados de forma independente. As correções de sessão, isolamento e concorrência foram conferidas em nova leitura.
+**Versão 1 aprovada em 21/11/2026.** O [contrato funcional](contrato-funcional.md), a [TechSpec](techspec.md) e as [tarefas](tarefas.md) foram revisados de forma independente. As correções de sessão, isolamento e concorrência foram conferidas em nova leitura.
 
 ## Entrega proposta
 

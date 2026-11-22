@@ -7,18 +7,24 @@
     "frontend"
   ],
   "scripts": {
-    "dev": "concurrently -k -n api,web -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev": "node scripts/dev.mjs",
     "dev:backend": "npm run dev -w backend",
     "dev:frontend": "npm run dev -w frontend",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",
     "test": "npm run test --workspaces",
+    "test:integration": "node backend/scripts/pilot-database.mjs",
     "test:coverage": "npm run test:coverage --workspaces",
     "test:backend": "npm run test -w backend",
     "test:frontend": "npm run test -w frontend",
     "db:check": "npm run db:check -w backend",
     "db:generate": "npm run db:generate -w backend",
-    "db:migrate": "npm run db:migrate -w backend"
+    "db:migrate": "npm run db:migrate -w backend",
+    "dev:apps": "concurrently -k -n api,web -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "worktree:setup": "node scripts/setup-worktree.mjs",
+    "db:profile:seed": "npm run db:profile:seed -w backend",
+    "db:profile:check": "npm run db:profile:check -w backend",
+    "db:profile:sync": "npm run db:profile:sync -w backend --"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

@@ -8,6 +8,27 @@
       "when": 1795292165802,
       "tag": "0000_sparkling_zaladane",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795303978743,
+      "tag": "0001_piloto_reservas",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795303979034,
+      "tag": "0002_exclusao_reservas",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795309412793,
+      "tag": "0003_cadastro_opcoes",
+      "breakpoints": true
     }
   ]
 }

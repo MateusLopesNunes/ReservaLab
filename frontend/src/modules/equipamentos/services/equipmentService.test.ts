@@ -1,12 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { authenticatedFetch } from '../../auth/services/authenticatedFetch'
 import { createEquipment, listEquipment } from './equipmentService'
 
-const fetchMock = vi.fn<typeof fetch>()
+vi.mock('../../auth/services/authenticatedFetch')
+
+const fetchMock = vi.mocked(authenticatedFetch)
 const item = { id: 'd5c48d1f-a1b9-4fd2-b65e-718943a1bc57', name: 'Projetor', description: null }
 
 beforeEach(() => {
   fetchMock.mockReset()
-  vi.stubGlobal('fetch', fetchMock)
 })
 
 describe('serviço de equipamentos', () => {

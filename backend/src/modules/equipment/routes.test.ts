@@ -8,6 +8,22 @@ vi.mock('./data/equipmentRepository.js', () => ({
   listEquipment: vi.fn()
 }))
 
+vi.mock('../auth/routes.js', async () => {
+  const { Router } = await import('express')
+  return {
+    authRouter: Router(),
+    requireAuthentication: (_request: unknown, _response: unknown, next: () => void) => next()
+  }
+})
+vi.mock('../profileOptions/routes.js', async () => {
+  const { Router } = await import('express')
+  return { profileOptionsRouter: Router() }
+})
+vi.mock('../reservations/routes.js', async () => {
+  const { Router } = await import('express')
+  return { reservationsRouter: Router() }
+})
+
 const item = { id: 'd5c48d1f-a1b9-4fd2-b65e-718943a1bc57', name: 'Projetor', description: null }
 
 beforeEach(() => vi.resetAllMocks())
